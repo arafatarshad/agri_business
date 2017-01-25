@@ -1,36 +1,3 @@
-<!-- resources/views/auth/register.blade.php -->
-
-<!-- <form method="POST" action="/auth/register">
-    {!! csrf_field() !!}
-
-    <div>
-        Name
-        <input type="text" name="name" value="{{ old('name') }}">
-    </div>
-
-    <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
-    </div>
-
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
-
-    <div>
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
-
-    <div>
-        <button type="submit">Register</button>
-    </div>
-  </form> -->
-
-
-
-
   <!DOCTYPE html>
   <html>
   <head>
@@ -49,9 +16,22 @@
     <link href="{{ asset("/bower_components/admin-lte/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset("/bower_components/admin-lte/plugins/iCheck/square/blue.css")}}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{{URL::to('assets/css/main.css')}}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{URL::to('assets/css/main.css')}}"> -->
+    <!-- select2 css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
+    <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.2.3.min.js") }}"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="{{ asset ("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+
+    <script src="{{ asset ("/bower_components/admin-lte/plugins/iCheck/icheck.min.js") }}" type="text/javascript"></script>
+
+    <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>  -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -63,7 +43,7 @@
 <body class="hold-transition register-page">
   <div class="register-box">
     <div class="register-logo">
-      <a href="../../index2.html"><b>Admin</b>LTE</a>
+      <a href="../../index2.html"><b>Agri</b>Business</a>
     </div>
 
     <div class="register-box-body">
@@ -73,24 +53,50 @@
       <form method="POST" action="{{URL::to('/')}}/auth/register">
         {!! csrf_field() !!}
         @if (count($errors) > 0)
-        <ul>
+        <ul style="color: red">
           @foreach ($errors->all() as $error)
           <li>{{ $error }}</li>
           @endforeach
         </ul>
         @endif
         <div class="form-group has-feedback">
-          <input type="text" class="form-control" name="name" placeholder="Full name">
+          <select name="thana_id" id="thana_id" class="form-control"></select>
+        </div>
+
+        <div class="form-group has-feedback">
+          <select class="form-control" name="user_type" name="user_type" id="user_type" required="" placeholder="select user type">
+            <option value="">Select User Type</option>
+            <option value="1">Farmer</option>
+            <option value="2">Dealer</option>
+          </select> 
+        </div>
+
+
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" required="" name="name" placeholder="Full name">
           <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
+
+
+
+        <!-- 
         <div class="form-group has-feedback">
           <input type="email" name="email" class="form-control" placeholder="Email">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div> -->
+        <div class="form-group has-feedback">
+          <input type="text" required="" name="phone_no" class="form-control" placeholder="Phone Number" >
+          <span class="glyphicon glyphicon-phone form-control-feedback"></span>
         </div>
+
+
         <div class="form-group has-feedback">
           <input type="password" name="password" class="form-control" placeholder="Password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
+
+
+
         <div class="form-group has-feedback">
           <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
           <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
@@ -124,21 +130,79 @@
       <!-- /.form-box -->
     </div>
     <!-- /.register-box -->
+    <script>
 
 
-    <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.2.3.min.js") }}"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="{{ asset ("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset ("/bower_components/admin-lte/plugins/iCheck/icheck.min.js") }}" type="text/javascript"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     });
+    // alert("hi");
   });
-</script>
-</body>
-</html>
+      $(document).ready(function(){
+        // alert("hi");
+        // $('#thana_id').select2();
+
+
+// $("#thana_id").select2({
+//     minimumInputLength: 1,
+//     tags: [],
+//     ajax: {
+//         url: "{{URL::to('/')}}/getallthana",
+//         dataType: 'json',
+//         type: "POST",
+//         quietMillis: 50,
+//         data: function (term) {
+//             return {
+//                 term: term
+//             };
+//         },
+//         results: function (data) {
+//             return {
+//                 results: $.map(data, function (item) {
+//                     return {
+//                         text: item.text, 
+//                         id: item.id
+//                     }
+//                 })
+//             };
+//         }
+//     }
+// });
+
+
+
+
+
+
+
+
+$("#thana_id").select2({
+  ajax: {
+   url: "{{URL::to('/')}}/getallthana",
+        dataType: 'json',
+        type: "POST",
+    delay: 250,
+    data: function (params) {
+      return {
+        term: params.term,  
+      };
+    },
+    processResults: function (data, params) { 
+      params.page = params.page || 1;
+      return {
+        results: data,
+        pagination: {
+          more: (params.page * 30) < data.total_count
+        }
+      };
+    },
+    cache: true
+  }
+});
+      });
+    </script>
+  </body>
+  </html>

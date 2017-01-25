@@ -42,3 +42,4 @@ Route::get('/getallvisitorsforthisdaterange','MainPageController@getAllVisitorFo
 Route::get('/showresidentsguestlog','MainPageController@showLogForThisResident');
 Route::get('/gethostnames','MainPageController@getAllHostNames');
 Route::get('/guestrecords','MainPageController@getRecordsAgainstThisUser');
+Route::post('/getallthana','MainPageController@getAllThana');
