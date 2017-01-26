@@ -22,7 +22,7 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-    protected $redirectPath = '/'; //added by mugdha
+    protected $redirectPath = '/dashboard'; //added by mugdha
     protected $loginPath = '/auth/login'; //added by mugdha
     /**
      * Create a new authentication controller instance.

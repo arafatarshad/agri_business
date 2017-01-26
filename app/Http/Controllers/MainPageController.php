@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use Input;
+use Auth;
 class MainPageController extends Controller
 {
     /**
@@ -21,6 +22,21 @@ class MainPageController extends Controller
     {
         //
         return view('layouts.homepage');
+    }
+    
+    public function chooseDashboard()
+    { 
+        // $user_type = Auth::user()->user_type; 
+        // if ($user_type==1) { 
+        //     return view('layouts.farmers_homepage');
+        // }else{
+        //     return view('layouts.dealers_homepage');
+        // }
+            return view('layouts.agri_homepage');
+    }
+        public function getFarmerAdd()
+    { 
+            return view('layouts.farmer_add');
     }
 
     /**

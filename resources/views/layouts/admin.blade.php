@@ -41,198 +41,59 @@
                 <a href="#" class="logo"><b>Admin</b>LTE</a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
-                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                   <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
- <!--                     <li class="dropdown messages-menu">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <ul class="menu">
-                                    <li> 
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image"/>
-                                            </div> 
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                </ul> 
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li>  -->
-
-<!--                     <li class="dropdown notifications-menu"> 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li> 
-                                <ul class="menu">
-                                    <li> 
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li> 
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>  -->
-<!--                     <li class="dropdown tasks-menu"> 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                             <ul class="menu">
-                                <li> 
-                                    <a href="#">
-                                     <h3>
-                                        Design some buttons
-                                        <small class="pull-right">20%</small>
-                                    </h3>
-                                    <div class="progress xs">
-                                     <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">20% Complete</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li> 
+                        <li>
+                            <a href="{{URL::to('/')}}/auth/logout" class="btn btn-flat">Sign out</a>
+                        </li>
                     </ul>
-                </li>
-                <li class="footer">
-                    <a href="#">View all tasks</a>
-                </li>
-            </ul>
-        </li>  -->
-<!--         <li class="dropdown user user-menu"> 
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="user-image" alt="User Image"/> 
-                <span class="hidden-xs">Alexander Pierce</span>
-            </a>
-            <ul class="dropdown-menu"> 
-                <li class="user-header">
-                    <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image" />
-                    <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
-                    </p>
-                </li> 
-                <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Followers</a>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+
+        <aside class="main-sidebar"> 
+            <section class="sidebar"> 
+                <div class="user-panel" style="height:50px"> 
+                    <div class="pull-left info">
+                        @if(isset(Auth::user()->name))
+                        <p>{{Auth::user()->name }}</p>
+                        @endif 
+                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                        <a href="#">Friends</a>
-                    </div>
-                </li> 
-                <li class="user-footer">
-                    <div class="pull-left">
-                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                </li>
-            </ul>
-        </li> -->
-        <li>
-            <a href="{{URL::to('/')}}/auth/logout" class="btn btn-flat">Sign out</a>
-        </li>
-    </ul>
-</div>
-</nav>
-</header>
-<!-- Left side column. contains the logo and sidebar -->
+                </div>
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu"> 
+                    <!-- <li><a href="{{URL::to('/')}}/dashboard"><span>DashBoard</span></a></li> -->
+                    @if (Auth::user()->user_type==1) { 
+                    <li><a href="{{URL::to('/')}}/farmer_dashboard"><span>Farmer DashBoard</span></a></li>
+                    <li><a href="{{URL::to('/get_farmer_add')}}"><span>Post Add</span></a></li>
+                    <li><a href="{{URL::to('/request_goods')}}"><span>Request Goods</span></a></li>
+                    @endif
+ 
 
-<aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel" style="height:50px">
- <!--            <div class="pull-left image">
-                <img src="{{ asset("/bower_components/admin-lte/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image" />
-            </div> -->
-            <div class="pull-left info">
-                @if(isset(Auth::user()->name))
-                <p>{{Auth::user()->name }}</p>
-                @endif
-                <!-- Status -->
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-        </div>
-
-        <!-- search form (Optional) -->
-<!--         <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn">
-                    <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                </span>
-            </div>
-        </form>
- -->        <!-- /.search form -->
-
-        <!-- Sidebar Menu -->
-        <ul class="sidebar-menu">
-            <!-- <li class="header">HEADER</li> -->
-            <!-- Optionally, you can add icons to the links -->
-            <!-- <li class="active"><a href="{{URL::to('/')}}/"><span>DashBoard</span></a></li> -->
-            <li><a href="{{URL::to('/')}}"><span>DashBoard</span></a></li>
-            <li><a href="{{URL::to('/')}}/showresidentsguestlog"><span>Show Resident's Log</span></a></li>
-            <li class="treeview">
-                <a href="#"><span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-
-                    <li><a href="{{URL::to('/')}}/permission/role">Create Role</a></li>
-                    <li><a href="{{URL::to('/')}}/permission/permission">Create Permission</a></li>
-                    <li><a href="{{URL::to('/')}}/permission/user_role">Assign User Role</a></li>
-                    <li><a href="{{URL::to('/')}}/permission/role_permission">Assign Permission On Role</a></li>
-                    
-                </ul>
-            </li>
+                    <li class="treeview">
+                        <a href="#"><span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{URL::to('/')}}/permission/role">Create Role</a></li>
+                            <li><a href="{{URL::to('/')}}/permission/permission">Create Permission</a></li>
+                            <li><a href="{{URL::to('/')}}/permission/user_role">Assign User Role</a></li>
+                            <li><a href="{{URL::to('/')}}/permission/role_permission">Assign Permission On Role</a></li>
+                        </ul>
+                    </li>
 
 
 
 
-        </ul><!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-</aside>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="height:100%">
-    <!-- Content Header (Page header) -->
-<!--             <section class="content-header">
-                <h1>
-                    Page Header
-                    <small>Optional description</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                    <li class="active">Here</li>
-                </ol>
-            </section> -->
-            
-            <!-- Main content -->
+                </ul><!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="height:100%">
             <section class="content" style="height:100%;">
                 <!-- Your Page Content Here -->                  
                 <div class="container-fluid" style="height:100%">
@@ -272,6 +133,6 @@
           <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>           
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
           <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-              @yield('scripts')
-          </body>
-          </html>
+          @yield('scripts')
+      </body>
+      </html>

@@ -14,6 +14,20 @@ Route::get('/', [
     'middleware' => 'auth',
     'uses' => 'MainPageController@index'
 ]);
+
+Route::get('/dashboard', [
+    'middleware' => 'auth',
+    'uses' => 'MainPageController@chooseDashboard'
+]);
+
+
+Route::get('/get_farmer_add', [
+    'middleware' => 'auth',
+    'uses' => 'MainPageController@getFarmerAdd'
+]);
+
+
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
