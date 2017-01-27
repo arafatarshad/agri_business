@@ -29,10 +29,10 @@
     </div>
 @endif
 	<div class="row">
-		<h1 class="main-header text-center">Post your Add</h1>
+		<h1 class="main-header text-center">Request your Demands</h1>
 	</div>
 
-	<form action="{{URL::to('/')}}/post_add" method="POST" enctype="multipart/form-data">
+	<form action="{{URL::to('/')}}/post_request_goods" method="POST" enctype="multipart/form-data">
 		{{ csrf_field() }} 
 		<div class="row" style="">
 			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
@@ -82,14 +82,7 @@
 						</div>
 					</div>				
 				</div>			
-				<div class="row">
-					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-						<div class="form-group has-feedback">
-							<label for="">Price</label>
-							<input type="number" class="form-control" name="product_price" id="product_price" required="" min="0"> 
-						</div>
-					</div> 				
-				</div>	
+
 
 				<div class="row">
 					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">

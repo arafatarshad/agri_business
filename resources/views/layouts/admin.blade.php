@@ -20,7 +20,7 @@
 
 
 
-          <link rel="stylesheet" type="text/css" href="{{URL::to('assets/css/main.css')}}">
+          <!-- <link rel="stylesheet" type="text/css" href="{{URL::to('assets/css/main.css')}}"> -->
           <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
           <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 
@@ -62,20 +62,26 @@
                         @if(isset(Auth::user()->name))
                         <p>{{Auth::user()->name }}</p>
                         @endif 
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                        <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu"> 
                     <!-- <li><a href="{{URL::to('/')}}/dashboard"><span>DashBoard</span></a></li> -->
                     @if (Auth::user()->user_type==1) { 
-                    <li><a href="{{URL::to('/')}}/farmer_dashboard"><span>Farmer DashBoard</span></a></li>
+                    <li><a href="{{URL::to('/')}}/dashboard"><span>Farmer DashBoard</span></a></li>
                     <li><a href="{{URL::to('/get_farmer_add')}}"><span>Post Add</span></a></li>
                     <li><a href="{{URL::to('/request_goods')}}"><span>Request Goods</span></a></li>
                     @endif
- 
 
-                    <li class="treeview">
+                    @if (Auth::user()->user_type==2) { 
+                    <li><a href="{{URL::to('/')}}/dashboard"><span>Dealer DashBoard</span></a></li> 
+                    @endif 
+
+
+
+
+<!--                     <li class="treeview">
                         <a href="#"><span>Settings</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="{{URL::to('/')}}/permission/role">Create Role</a></li>
@@ -83,7 +89,7 @@
                             <li><a href="{{URL::to('/')}}/permission/user_role">Assign User Role</a></li>
                             <li><a href="{{URL::to('/')}}/permission/role_permission">Assign Permission On Role</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
 
 

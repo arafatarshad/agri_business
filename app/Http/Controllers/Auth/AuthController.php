@@ -44,14 +44,14 @@ class AuthController extends Controller
     {
         // dd("before");
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            // 'email' => 'required|email|max:255|unique:users',
+            'name' => 'required|max:255', 
             'phone_no' => 'required|regex:/(01)[0-9]{9}/|unique:users,phone_no',
             'thana_id' => 'required',
             'user_type' => 'required',
+            'address' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
-        // dd($data);
+        dd($data);
     }
 
     /**
@@ -69,6 +69,7 @@ class AuthController extends Controller
             'phone_no' => $data['phone_no'],
             'thana_id' => $data['thana_id'],
             'user_type' => $data['user_type'],
+            'address' => $data['address'],
             'password' => bcrypt($data['password']),
         ]);
     }

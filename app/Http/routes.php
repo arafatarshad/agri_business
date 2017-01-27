@@ -19,13 +19,26 @@ Route::get('/dashboard', [
     'middleware' => 'auth',
     'uses' => 'MainPageController@chooseDashboard'
 ]);
-
+ 
 
 Route::get('/get_farmer_add', [
     'middleware' => 'auth',
     'uses' => 'MainPageController@getFarmerAdd'
 ]);
 Route::post('post_add', 'MainPageController@postAdd');
+
+Route::get('/request_goods', [
+    'middleware' => 'auth',
+    'uses' => 'MainPageController@getRequestGoods'
+]);
+Route::post('post_request_goods', 'MainPageController@postRequestGoods');
+Route::post('/history','MainPageController@getHistory');
+Route::post('/get_dealers_posts','MainPageController@getDealerHistory');
+
+Route::get('/delete_post/{id}','MainPageController@deletePost');
+Route::get('/sold_post/{id}','MainPageController@soldPost');
+Route::get('/process_post/{id}','MainPageController@ProcessPost');
+Route::get('/cancel_post/{id}','MainPageController@CancelPost');
  
 
 

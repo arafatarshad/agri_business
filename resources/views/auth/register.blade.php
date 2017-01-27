@@ -60,16 +60,21 @@
         </ul>
         @endif
         <div class="form-group has-feedback">
-          <select name="thana_id" id="thana_id" class="form-control"></select>
-        </div>
-
-        <div class="form-group has-feedback">
           <select class="form-control" name="user_type" name="user_type" id="user_type" required="" placeholder="select user type">
             <option value="">Select User Type</option>
             <option value="1">Farmer</option>
             <option value="2">Dealer</option>
           </select> 
         </div>
+
+        <div class="form-group has-feedback">
+          <select name="thana_id" id="thana_id" class="form-control"></select>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" required="" name="address" placeholder="Address">
+          <span class="glyphicon glyphicon-home form-control-feedback"></span>
+        </div>
+
 
 
         <div class="form-group has-feedback">
