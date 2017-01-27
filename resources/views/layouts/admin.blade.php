@@ -101,7 +101,7 @@
                         <div class="col-lg-12">
                             @section('notification-panel')
                         </div>
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" style="padding-bottom: 100px;">
                             @yield('content')
                         </div>      
                     </div>  

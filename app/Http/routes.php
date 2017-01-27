@@ -25,7 +25,8 @@ Route::get('/get_farmer_add', [
     'middleware' => 'auth',
     'uses' => 'MainPageController@getFarmerAdd'
 ]);
-
+Route::post('post_add', 'MainPageController@postAdd');
+ 
 
 
 // Authentication routes...
@@ -56,4 +57,7 @@ Route::get('/getallvisitorsforthisdaterange','MainPageController@getAllVisitorFo
 Route::get('/showresidentsguestlog','MainPageController@showLogForThisResident');
 Route::get('/gethostnames','MainPageController@getAllHostNames');
 Route::get('/guestrecords','MainPageController@getRecordsAgainstThisUser');
+
+
 Route::post('/getallthana','MainPageController@getAllThana');
+Route::post('/getallcategories','MainPageController@getAllCategories');
