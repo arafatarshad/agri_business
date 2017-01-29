@@ -26,9 +26,44 @@ class MainPageController extends Controller
     public function index()
     {
         //
-        return view('layouts.homepage');
+        $BASE_URL = "http://query.yahooapis.com/v1/public/yql";
+
+        $yql_query = 'select * from weather.forecast where woeid =   1915035';
+        $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json&u=c";
+
+    // Make call with cURL
+        $session = curl_init($yql_query_url);
+        curl_setopt($session, CURLOPT_RETURNTRANSFER,true);
+        $json = curl_exec($session);
+    // Convert JSON to PHP object
+        $phpObj =  json_decode($json);
+        // dd($phpObj->query->results->channel);
+        return view('website_views.index',['weather_data'=>$phpObj]);
     }
-    
+    public function about()
+    { 
+        return view('website_views.about');
+    }
+    public function contact()
+    { 
+        return view('website_views.contact');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function chooseDashboard()
     { 
         $user_type = Auth::user()->user_type; 
@@ -243,12 +278,12 @@ public function postAdd(Request $request){
         
         if($post->save()){
             // return Redirect::back();
-             return Redirect::back()->with('status', 'Addvertisement Saved');
-        }else{
-            return Redirect::back()
-            ->withInput();
-        }
-    } 
+         return Redirect::back()->with('status', 'Addvertisement Saved');
+     }else{
+        return Redirect::back()
+        ->withInput();
+    }
+} 
 }
 public function getRequestGoods(Request $request){
     $category=new Categories;
@@ -331,12 +366,12 @@ public function postRequestGoods(Request $request){
 public function getHistory(Request $request){ 
     $id=intval($request->user_id);
     $data=DB::select("
-            SELECT 
-            a.id,DATE(a.created_at) as post_date,a.name,a.description,CONCAT(a.quantity,'',c.name) as quantity,a.type,CONCAT(a.price,' tk') as price,b.name as category,a.status 
-            from posts a 
-            JOIN categories b on a.categories_id=b.id
-            JOIN units c ON a.units_id=c.id
-            WHERE a.users_id=$id AND a.is_delete=0 ORDER by a.created_at desc
+        SELECT 
+        a.id,DATE(a.created_at) as post_date,a.name,a.description,CONCAT(a.quantity,'',c.name) as quantity,a.type,CONCAT(a.price,' tk') as price,b.name as category,a.status 
+        from posts a 
+        JOIN categories b on a.categories_id=b.id
+        JOIN units c ON a.units_id=c.id
+        WHERE a.users_id=$id AND a.is_delete=0 ORDER by a.created_at desc
         "); 
     return $data;
 }
@@ -344,34 +379,34 @@ public function getDealerHistory(Request $request){
     $thana_id=intval($request->user_location);
 
     $data=DB::select("
-            SELECT 
-            a.id,DATE(a.created_at) as post_date,a.name,a.description,CONCAT(a.quantity,'',c.name) as quantity,a.type,CONCAT(a.price,' tk') as price,b.name as category,a.status ,d.phone_no,d.address
-            from posts a 
-            JOIN categories b on a.categories_id=b.id
-            JOIN units c ON a.units_id=c.id
-            JOIN users d ON a.users_id=d.id AND d.thana_id=$thana_id
-            WHERE a.is_delete=0 AND a.type=2 ORDER by a.created_at desc
+        SELECT 
+        a.id,DATE(a.created_at) as post_date,a.name,a.description,CONCAT(a.quantity,'',c.name) as quantity,a.type,CONCAT(a.price,' tk') as price,b.name as category,a.status ,d.phone_no,d.address
+        from posts a 
+        JOIN categories b on a.categories_id=b.id
+        JOIN units c ON a.units_id=c.id
+        JOIN users d ON a.users_id=d.id AND d.thana_id=$thana_id
+        WHERE a.is_delete=0 AND a.type=2 ORDER by a.created_at desc
         "); 
     return $data;
 }
 public function deletePost($id){
     $id=intval($id); 
-  DB::update("update posts set is_delete=1 WHERE id=$id");
+    DB::update("update posts set is_delete=1 WHERE id=$id");
     return Redirect::back()->with('status', 'Post Deleted');
 }
 public function soldPost($id){
     $id=intval($id); 
-  DB::update("update posts set status=3 WHERE id=$id");
+    DB::update("update posts set status=3 WHERE id=$id");
     return Redirect::back()->with('status', 'Post Status Changed');
 }
 public function ProcessPost($id){
     $id=intval($id); 
-  DB::update("update posts set status=2 WHERE id=$id");
+    DB::update("update posts set status=2 WHERE id=$id");
     return Redirect::back()->with('status', 'Post Status Updated');
 }
 public function CancelPost($id){
     $id=intval($id); 
-  DB::update("update posts set status=1 WHERE id=$id");
+    DB::update("update posts set status=1 WHERE id=$id");
     return Redirect::back()->with('status', 'Processing Cancelled');
 }
 }

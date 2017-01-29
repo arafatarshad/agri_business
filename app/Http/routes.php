@@ -9,11 +9,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', [
-    'middleware' => 'auth',
-    'uses' => 'MainPageController@index'
-]);
+// website's routes
+Route::get('/','MainPageController@index');
+Route::get('/about','MainPageController@about');
+Route::get('/contact','MainPageController@contact');
 
 Route::get('/dashboard', [
     'middleware' => 'auth',
