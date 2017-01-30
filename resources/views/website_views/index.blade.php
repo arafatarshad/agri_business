@@ -76,13 +76,19 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                         <li>
                             <a href="{{URL::to('/')}}/about">About</a>
                         </li>
-                        <li>
+<!--                         <li>
                             <a href="services.html">Services</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="{{URL::to('/')}}/contact">Contact</a>
                         </li>
-                        <li class="dropdown">
+                        <li>
+                        <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
+                        </li>
+                        <li>
+                        <a href="{{URL::to('/')}}/auth/login">Log In</a>
+                        </li>                        
+<!--                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -135,7 +141,7 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                                     <a href="pricing.html">Pricing Table</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -218,21 +224,21 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                         </tr>
                     </thead>
                     <tbody>
-                       <?php for($i=0;$i<10;$i++):?>
-                         <tr>
-                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->date);?></td>
-                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->day);?></td>
-                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->high);?>&deg;</td>
-                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->low);?>&deg;</td>
-                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->text);?></td>
-                         </tr>   
+                     <?php for($i=0;$i<10;$i++):?>
+                       <tr>
+                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->date);?></td>
+                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->day);?></td>
+                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->high);?>&deg;</td>
+                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->low);?>&deg;</td>
+                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->text);?></td>
+                       </tr>   
 
-                     <?php endfor;?>
-                 </tbody>
-             </table>
-         </div>
+                   <?php endfor;?>
+               </tbody>
+           </table>
+       </div>
 
-     </div>
+   </div>
 
 
 <!--                 <div class="col-md-4">

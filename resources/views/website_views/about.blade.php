@@ -52,7 +52,8 @@
     <body>
 
         <!-- Navigation -->
-         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -70,13 +71,19 @@
                         <li>
                             <a href="{{URL::to('/')}}/about">About</a>
                         </li>
-                        <li>
+<!--                         <li>
                             <a href="services.html">Services</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="{{URL::to('/')}}/contact">Contact</a>
                         </li>
-                        <li class="dropdown">
+                        <li>
+                        <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
+                        </li>
+                        <li>
+                        <a href="{{URL::to('/')}}/auth/login">Log In</a>
+                        </li>                        
+<!--                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -129,14 +136,13 @@
                                     <a href="pricing.html">Pricing Table</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
             <!-- /.container -->
         </nav>
-
         <!-- Page Content -->
         <div class="container">
 

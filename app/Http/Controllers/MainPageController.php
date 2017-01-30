@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 // use Illuminate\Http\Request;
 // use Validator;
 // use App\Http\Requests;
@@ -47,6 +48,126 @@ class MainPageController extends Controller
     public function contact()
     { 
         return view('website_views.contact');
+    }
+    public function advertisements(Request $request)
+    { 
+
+        $all_categories=DB::select("SELECT * FROM categories");
+        $all_thana=DB::select("SELECT * FROM thana");
+        $all_posts=DB::select("
+            SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
+            FROM posts a 
+            JOIN users b ON a.users_id=b.id AND a.origin=1
+            JOIN categories c ON a.categories_id=c.id
+            JOIN thana d ON b.thana_id=d.id
+            WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
+            UNION 
+            SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
+            FROM posts e 
+            JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+            JOIN categories g ON e.categories_id=g.id
+            JOIN thana h ON f.thana_id=h.id
+            WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
+            ORDER BY created_at  DESC");
+
+        $page = 1;
+        $perPage = 15; 
+        $currentPage = Input::get('page', 1)-1 ;
+        // dd($currentPage);
+         // $currentPage = Input::get('page') ?: 0;
+        $pagedData = array_slice($all_posts, $currentPage * $perPage, $perPage);
+        $query =  new Paginator($pagedData, count($all_posts), $perPage);
+        $query->setPath('Your Url');
+
+            // dd($query);
+
+        $query->setPath('advertisements');
+        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>0,'default_thana'=>0])->with('all_posts',$query);
+    }
+
+
+    public function filterAdd(Request $request){
+        $thana_id=0;
+        $category_id=0;
+        if (isset($request->thana_id)) {
+            $thana_id=intval($request->thana_id); 
+        }
+        if (isset($request->category_id)) {
+            $category_id=intval($request->category_id); 
+        }
+
+        if ($thana_id==0 && $category_id==0) {
+            # code...
+            return Redirect::back();
+        }
+        else if($thana_id!=0 && $category_id==0){
+            $all_posts=DB::select("
+                SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
+                FROM posts a 
+                JOIN users b ON a.users_id=b.id AND a.origin=1
+                JOIN categories c ON a.categories_id=c.id
+                JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
+                WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
+                UNION 
+                SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
+                FROM posts e 
+                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                JOIN categories g ON e.categories_id=g.id
+                JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
+                WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
+                ORDER BY created_at  DESC");
+        }else if($thana_id==0 && $category_id!=0){
+            $all_posts=DB::select("
+                SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
+                FROM posts a 
+                JOIN users b ON a.users_id=b.id AND a.origin=1
+                JOIN categories c ON a.categories_id=c.id AND a.categories_id=$category_id
+                JOIN thana d ON b.thana_id=d.id 
+                WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
+                UNION 
+                SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
+                FROM posts e 
+                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                JOIN categories g ON e.categories_id=g.id AND e.categories_id=$category_id
+                JOIN thana h ON f.thana_id=h.id  
+                WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
+                ORDER BY created_at  DESC");
+        }else{
+            $all_posts=DB::select("
+                SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
+                FROM posts a 
+                JOIN users b ON a.users_id=b.id AND a.origin=1
+                JOIN categories c ON a.categories_id=c.id AND a.categories_id=$category_id
+                JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
+                WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
+                UNION 
+                SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
+                FROM posts e 
+                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                JOIN categories g ON e.categories_id=g.id AND e.categories_id=$category_id
+                JOIN thana h ON f.thana_id=h.id AND ef.thana_id=$thana_id
+                WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
+                ORDER BY created_at  DESC");
+        }
+
+        $all_categories=DB::select("SELECT * FROM categories");
+        $all_thana=DB::select("SELECT * FROM thana");
+
+
+        $page = 1;
+        $perPage = 15; 
+        $currentPage = Input::get('page', 1)-1 ;
+        // dd($currentPage);
+         // $currentPage = Input::get('page') ?: 0;
+        $pagedData = array_slice($all_posts, $currentPage * $perPage, $perPage);
+        $query =  new Paginator($pagedData, count($all_posts), $perPage);
+        $query->setPath('Your Url');
+
+            // dd($query);
+
+        $query->setPath('advertisements');
+        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>$category_id,'default_thana'=>$thana_id])->with('all_posts',$query);
+        dd($request->all());
     }
 
 

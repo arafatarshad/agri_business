@@ -13,6 +13,8 @@
 Route::get('/','MainPageController@index');
 Route::get('/about','MainPageController@about');
 Route::get('/contact','MainPageController@contact');
+Route::get('/advertisements','MainPageController@advertisements');
+Route::post('/filter_ad','MainPageController@filterAdd');
 
 Route::get('/dashboard', [
     'middleware' => 'auth',
