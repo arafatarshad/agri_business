@@ -15,6 +15,8 @@ Route::get('/about','MainPageController@about');
 Route::get('/contact','MainPageController@contact');
 Route::get('/advertisements','MainPageController@advertisements');
 Route::post('/filter_ad','MainPageController@filterAdd');
+Route::get('/post/{id}','MainPageController@singlePost');
+Route::post('/comment','MainPageController@postComment');
 
 Route::get('/dashboard', [
     'middleware' => 'auth',

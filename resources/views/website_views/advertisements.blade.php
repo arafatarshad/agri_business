@@ -198,9 +198,9 @@
     </div>
 
     <div class="col-md-9">
-        <div class="item active" style="margin-bottom: 50px;">
+<!--         <div class="item active" style="margin-bottom: 50px;">
          <img class="slide-image" src="{{ asset ('/assets/img/agri_cover_1.jpg') }}"  alt=""> 
-     </div>
+     </div> -->
 <!-- 
         <div class="row carousel-holder">
 
@@ -385,6 +385,7 @@
                         No description Added . .        
                         @endif
                     </p>
+                    <h5><span class="pull-right">{{$post->thana_name}}</span></h5>
                 </div>
 <!--                 <div class="ratings">
                     <p class="pull-right">15 reviews</p>

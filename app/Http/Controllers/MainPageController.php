@@ -17,6 +17,8 @@ use App\Categories;
 use Validator;
 use Redirect;
 use App\Posts;
+use App\Comments;
+
 class MainPageController extends Controller
 {
     /**
@@ -145,7 +147,7 @@ class MainPageController extends Controller
                 FROM posts e 
                 JOIN user_details f ON e.id=f.posts_id AND e.origin=2
                 JOIN categories g ON e.categories_id=g.id AND e.categories_id=$category_id
-                JOIN thana h ON f.thana_id=h.id AND ef.thana_id=$thana_id
+                JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
                 WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
                 ORDER BY created_at  DESC");
         }
@@ -167,16 +169,51 @@ class MainPageController extends Controller
 
         $query->setPath('advertisements');
         return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>$category_id,'default_thana'=>$thana_id])->with('all_posts',$query);
-        dd($request->all());
+        // dd($request->all());
     }
 
 
 
+    public function singlePost($id){
+    // dd($id);
+        $id=intval($id);
+        $data=DB::select("SELECT 
+            a.id,a.name,a.quantity,a.expiry_date,a.photo,a.description,a.created_at,
+            cast(a.created_at as time)
+           as post_time,cast(a.created_at as date) as post_date ,a.price,COALESCE(b.id,c.id) as poster_id,COALESCE(b.name,c.name) as poster_name,COALESCE(b.phone_no,c.phone_no) as poster_phone,COALESCE(b.address,c.address) as poster_address,d.id as thana_id,d.name as thana_name,
+            e.name as category,f.name as unit
+            FROM posts a 
+            LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
+            LEFT JOIN user_details c ON a.id=c.posts_id AND a.origin=2
+            JOIN thana d ON ((b.thana_id=d.id AND a.origin=1) OR (c.thana_id=d.id AND a.origin=2))
+            JOIN categories e ON a.categories_id=e.id 
+            JOIN units f ON a.units_id=f.id
+            WHERE a.id=$id
+            ");   
+        $comments=DB::select("SELECT name,comment,created_at,cast(created_at as time)
+           as post_time,cast(created_at as date) as post_date from comments where posts_id=$id ORDER BY created_at");
+        // dd($comments);
+        return view('website_views.addpost',['data'=>$data,'comments'=>$comments]);
+    }
 
 
 
+public function postComment(Request $request){
+    // dd($request->all());
+    $id=intval($request->post_id);
+    $name=$request->commenter_name;
+    $comment_text=$request->comment;
 
+    $comment =new Comments;
+    $comment->posts_id=$id;
+    $comment->name=$name;
+    $comment->comment=$comment_text;
+    if ($comment->save()) {
+         $this->singlePost($id);
+    }
 
+    return Redirect::back()->withErrors(['could not save comment']);
+}
 
 
 

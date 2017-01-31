@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class POSTS extends Model
+class Comments extends Model
 {
     //
     public $timestamps = true;
-    protected $table = 'posts';
+
+    protected $table = 'comments';
     protected $primaryKey = 'id';
 }
