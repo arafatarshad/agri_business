@@ -17,6 +17,7 @@ Route::get('/advertisements','MainPageController@advertisements');
 Route::post('/filter_ad','MainPageController@filterAdd');
 Route::get('/post/{id}','MainPageController@singlePost');
 Route::post('/comment','MainPageController@postComment');
+Route::post('/post_add_from_front_end','MainPageController@postYourAddFromFrontEnd');
 
 Route::get('/dashboard', [
     'middleware' => 'auth',

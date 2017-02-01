@@ -18,6 +18,7 @@ use Validator;
 use Redirect;
 use App\Posts;
 use App\Comments;
+use App\UserDetails;
 
 class MainPageController extends Controller
 {
@@ -56,22 +57,24 @@ class MainPageController extends Controller
 
         $all_categories=DB::select("SELECT * FROM categories");
         $all_thana=DB::select("SELECT * FROM thana");
+        $all_units=DB::select("SELECT * FROM units");
+        // dd($all_units);
         $all_posts=DB::select("
             SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
             FROM posts a 
-            JOIN users b ON a.users_id=b.id AND a.origin=1
+            LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
             JOIN categories c ON a.categories_id=c.id
-            JOIN thana d ON b.thana_id=d.id
+            LEFT JOIN thana d ON b.thana_id=d.id
             WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
             UNION 
             SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
             FROM posts e 
-            JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+            LEFT JOIN user_details f ON e.id=f.posts_id AND e.origin=2
             JOIN categories g ON e.categories_id=g.id
-            JOIN thana h ON f.thana_id=h.id
+            LEFT JOIN thana h ON f.thana_id=h.id
             WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
             ORDER BY created_at  DESC");
-
+        // dd($all_posts);
         $page = 1;
         $perPage = 15; 
         $currentPage = Input::get('page', 1)-1 ;
@@ -84,7 +87,7 @@ class MainPageController extends Controller
             // dd($query);
 
         $query->setPath('advertisements');
-        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>0,'default_thana'=>0])->with('all_posts',$query);
+        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>0,'default_thana'=>0,'all_units'=>$all_units])->with('all_posts',$query);
     }
 
 
@@ -106,54 +109,55 @@ class MainPageController extends Controller
             $all_posts=DB::select("
                 SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
                 FROM posts a 
-                JOIN users b ON a.users_id=b.id AND a.origin=1
+                LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
                 JOIN categories c ON a.categories_id=c.id
-                JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
+                LEFT  JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
                 WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
                 UNION 
                 SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
                 FROM posts e 
-                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                LEFT  JOIN user_details f ON e.id=f.posts_id AND e.origin=2
                 JOIN categories g ON e.categories_id=g.id
-                JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
+                LEFT JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
                 WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
                 ORDER BY created_at  DESC");
         }else if($thana_id==0 && $category_id!=0){
             $all_posts=DB::select("
                 SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
                 FROM posts a 
-                JOIN users b ON a.users_id=b.id AND a.origin=1
+                LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
                 JOIN categories c ON a.categories_id=c.id AND a.categories_id=$category_id
-                JOIN thana d ON b.thana_id=d.id 
+                LEFT JOIN thana d ON b.thana_id=d.id 
                 WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
                 UNION 
                 SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
                 FROM posts e 
-                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                LEFT JOIN user_details f ON e.id=f.posts_id AND e.origin=2
                 JOIN categories g ON e.categories_id=g.id AND e.categories_id=$category_id
-                JOIN thana h ON f.thana_id=h.id  
+                LEFT JOIN thana h ON f.thana_id=h.id  
                 WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
                 ORDER BY created_at  DESC");
         }else{
             $all_posts=DB::select("
                 SELECT a.*,b.id as user_id,b.name as useer_name,b.phone_no as user_phone_no,b.address as user_address,c.id as category_id,c.name as category_name,d.id as thana_id,d.name as thana_name
                 FROM posts a 
-                JOIN users b ON a.users_id=b.id AND a.origin=1
+                LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
                 JOIN categories c ON a.categories_id=c.id AND a.categories_id=$category_id
-                JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
+                LEFT JOIN thana d ON b.thana_id=d.id AND b.thana_id=$thana_id
                 WHERE a.is_delete=0 AND a.expiry_date>CURDATE()
                 UNION 
                 SELECT e.*,f.id as user_id,f.name as useer_name,f.phone_no as user_phone_no,f.address as user_address,g.id as category_id,g.name as category_name,h.id as thana_id,h.name as thana_name
                 FROM posts e 
-                JOIN user_details f ON e.id=f.posts_id AND e.origin=2
+                LEFT JOIN user_details f ON e.id=f.posts_id AND e.origin=2
                 JOIN categories g ON e.categories_id=g.id AND e.categories_id=$category_id
-                JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
+                LEFT JOIN thana h ON f.thana_id=h.id AND f.thana_id=$thana_id
                 WHERE e.is_delete=0 AND e.expiry_date>CURDATE()
                 ORDER BY created_at  DESC");
         }
 
         $all_categories=DB::select("SELECT * FROM categories");
         $all_thana=DB::select("SELECT * FROM thana");
+        $all_units=DB::select("SELECT * FROM units");
 
 
         $page = 1;
@@ -168,7 +172,7 @@ class MainPageController extends Controller
             // dd($query);
 
         $query->setPath('advertisements');
-        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>$category_id,'default_thana'=>$thana_id])->with('all_posts',$query);
+        return view('website_views.advertisements',['all_thana'=>$all_thana,'all_categories'=>$all_categories,'default_category'=>$category_id,'default_thana'=>$thana_id,'all_units'=>$all_units])->with('all_posts',$query);
         // dd($request->all());
     }
 
@@ -176,11 +180,11 @@ class MainPageController extends Controller
 
     public function singlePost($id){
     // dd($id);
-        $id=intval($id);
+        // $id=intval($id);
         $data=DB::select("SELECT 
             a.id,a.name,a.quantity,a.expiry_date,a.photo,a.description,a.created_at,
             cast(a.created_at as time)
-           as post_time,cast(a.created_at as date) as post_date ,a.price,COALESCE(b.id,c.id) as poster_id,COALESCE(b.name,c.name) as poster_name,COALESCE(b.phone_no,c.phone_no) as poster_phone,COALESCE(b.address,c.address) as poster_address,d.id as thana_id,d.name as thana_name,
+            as post_time,cast(a.created_at as date) as post_date ,a.price,COALESCE(b.id,c.id) as poster_id,COALESCE(b.name,c.name) as poster_name,COALESCE(b.phone_no,c.phone_no) as poster_phone,COALESCE(b.address,c.address) as poster_address,d.id as thana_id,d.name as thana_name,
             e.name as category,f.name as unit
             FROM posts a 
             LEFT JOIN users b ON a.users_id=b.id AND a.origin=1
@@ -192,48 +196,48 @@ class MainPageController extends Controller
             ");   
         $comments=DB::select("SELECT name,comment,created_at,cast(created_at as time)
            as post_time,cast(created_at as date) as post_date from comments where posts_id=$id ORDER BY created_at");
-        // dd($comments);
+        // dd($data);
         return view('website_views.addpost',['data'=>$data,'comments'=>$comments]);
     }
 
 
 
-public function postComment(Request $request){
+    public function postComment(Request $request){
     // dd($request->all());
-    $id=intval($request->post_id);
-    $name=$request->commenter_name;
-    $comment_text=$request->comment;
+        $id=intval($request->post_id);
+        $name=$request->commenter_name;
+        $comment_text=$request->comment;
 
-    $comment =new Comments;
-    $comment->posts_id=$id;
-    $comment->name=$name;
-    $comment->comment=$comment_text;
-    if ($comment->save()) {
+        $comment =new Comments;
+        $comment->posts_id=$id;
+        $comment->name=$name;
+        $comment->comment=$comment_text;
+        if ($comment->save()) {
          $this->singlePost($id);
+     }
+
+     return Redirect::back()->withErrors(['could not save comment']);
+ }
+
+
+
+
+
+
+
+
+ public function chooseDashboard()
+ { 
+    $user_type = Auth::user()->user_type; 
+    $user_id = Auth::user()->id; 
+    $user_location = Auth::user()->thana_id; 
+    if ($user_type==1) { 
+        return view('layouts.farmers_homepage',['user_id'=>$user_id]);
+    }else{
+        return view('layouts.dealers_homepage',['user_location'=>$user_location]);
     }
-
-    return Redirect::back()->withErrors(['could not save comment']);
-}
-
-
-
-
-
-
-
-
-    public function chooseDashboard()
-    { 
-        $user_type = Auth::user()->user_type; 
-        $user_id = Auth::user()->id; 
-        $user_location = Auth::user()->thana_id; 
-        if ($user_type==1) { 
-            return view('layouts.farmers_homepage',['user_id'=>$user_id]);
-        }else{
-            return view('layouts.dealers_homepage',['user_location'=>$user_location]);
-        }
         // return view('layouts.agri_homepage');
-    }
+}
 
 
 
@@ -371,6 +375,103 @@ public function getFarmerAdd()
     $units=DB::select("select id,name from units");
     return view('layouts.farmer_add',['category'=>$category,'units'=>$units]);
 }
+public function postYourAddFromFrontEnd(Request $request)
+{ 
+    // dd($request->all());
+    $validator = Validator::make($request->all(), [
+        'product_category' => 'required',
+        'name' => 'required', 
+        'product_description' => 'required',
+        'product_quantity' => 'required|numeric',
+        'product_price' => 'required|numeric',
+        'product_unit' => 'required',
+        'expiry_date'=>'required',
+        'image_file'=>'image| max:2000'
+        // 'image_file'=>'image| mimes:jpeg,jpg,png | max:2000'
+        ]);
+
+    if ($validator->fails()) {
+        return Redirect::back()
+        ->withErrors($validator)
+        ->withInput();
+    }
+    // dd($request->all());
+    $post=new Posts;
+    $post->name=(string)Input::get('name');
+    $post->quantity=floatval(Input::get('product_quantity'));
+    $post->price=floatval(Input::get('product_price'));
+    $post->type=1;
+
+    if(isset($request->product_description)){
+        $post->description=(string)Input::get('product_description');
+    }
+    $post->expiry_date=(string)date('Y-m-d', strtotime(Input::get('expiry_date')));
+    
+    if (isset ($request->image_file) && !empty($request->image_file) && Input::file('image_file')->isValid())
+    {   
+        // dd("hi");
+        $extension = Input::file('image_file')->getClientOriginalExtension();
+        $uniq_id=uniqid('img_').'.'.$extension;
+        $post->photo=(string)$uniq_id;
+        $pic= Input::file('image_file'); 
+        if (!$pic->move("uploads", $uniq_id)) { 
+            return Redirect::back()
+            ->withInput()
+            ->withErrors(['could not upload image']); 
+        }
+
+        $post->status=1;
+        $post->is_delete=0;
+        $post->origin=2;
+        $post->categories_id=intval(Input::get('product_category'));
+        $post->units_id=intval(Input::get('product_unit'));
+        $post->users_id=NULL;
+        
+        if($post->save()){
+            // dd("hello");
+            $user_details=new UserDetails;
+            $user_details->name=Input::get("poster_name");
+            $user_details->phone_no=Input::get("poster_phone");
+            $user_details->address=Input::get("poster_address");
+            $user_details->thana_id=intval(Input::get("poster_thana_id"));
+            $user_details->posts_id=intval($post->id);
+            $user_details->save();
+
+           // return Redirect::back()->with('status', 'Addvertisement Saved');
+            $this->singlePost($post->id);
+        }else{
+            return Redirect::back()
+            ->withInput();
+        }
+    }else{
+        $post->status=1;
+        $post->is_delete=0;
+        $post->origin=2;
+        $post->categories_id=intval(Input::get('product_category'));
+        $post->units_id=intval(Input::get('product_unit'));
+        $post->users_id=NULL;
+        
+        if($post->save()){
+            // return Redirect::back();
+           $user_details=new UserDetails;
+           $user_details->name=Input::get("poster_name");
+           $user_details->phone_no=Input::get("poster_phone");
+           $user_details->address=Input::get("poster_address");
+           $user_details->thana_id=intval(Input::get("poster_thana_id"));
+           $user_details->posts_id=intval($post->id);
+           $user_details->save();
+           // return Redirect::back()->with('status', 'Addvertisement Saved');
+           $this->singlePost($post->id);
+       }else{
+        return Redirect::back()
+        ->withInput();
+    }
+} 
+
+
+
+// dd($request->all());
+}
 
 public function postAdd(Request $request){ 
     $validator = Validator::make($request->all(), [
@@ -383,7 +484,6 @@ public function postAdd(Request $request){
         'expiry_date'=>'required',
         'image_file'=>'image| max:2000'
         // 'image_file'=>'image| mimes:jpeg,jpg,png | max:2000'
-
         ]);
 
     if ($validator->fails()) {
@@ -430,6 +530,7 @@ public function postAdd(Request $request){
     }else{
         $post->status=1;
         $post->is_delete=0;
+        $post->origin=1;
         $post->categories_id=intval(Input::get('product_category'));
         $post->units_id=intval(Input::get('product_unit'));
         $post->users_id=Auth::user()->id;
