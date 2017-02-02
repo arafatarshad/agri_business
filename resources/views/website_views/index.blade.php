@@ -15,7 +15,7 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>Agri Biznes</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset ('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,15 +26,20 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
             /*background: #eeeeee;*/
             background: rgb(96,99,114);
             color: #fff;
+            /*color: #FF9800;*/
         }
         .temparature_text_large{
             font-size: 180px;
         }
         table{
-            background: #323135; 
+            /*background: #323135; */
+            /*background: #F57c50; */
+            /*background: #2196F3; */
+            /*background: #E040FB; */
+            background: #1976D2; 
         }
         #myCarousel{
-            height: 600px;
+            height: 600px; 
         }
         @media(max-width:767px) {
             .img-portfolio {
@@ -55,7 +60,7 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
 
     </head>
 
-    <body>
+    <body class="style-13">
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -68,80 +73,23 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{URL::to('/')}}/">Agri Business</a>
+                    <a class="navbar-brand" href="{{URL::to('/')}}/"><b style="color: #00ff3f">Agri</b><span style="color: #FF9800">Biznes</span></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="{{URL::to('/')}}/about">About</a>
-                        </li>
-<!--                         <li>
-                            <a href="services.html">Services</a>
-                        </li> -->
+                        </li> 
                         <li>
                             <a href="{{URL::to('/')}}/contact">Contact</a>
                         </li>
                         <li>
-                        <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
+                            <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
                         </li>
                         <li>
-                        <a href="{{URL::to('/')}}/auth/login">Log In</a>
+                            <a href="{{URL::to('/')}}/auth/login" class=""><button class="btn btn-xs btn-primary" style="padding: 1px 25px">Log In</button></a>
                         </li>                        
-<!--                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="portfolio-1-col.html">1 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-2-col.html">2 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-3-col.html">3 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-4-col.html">4 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-item.html">Single Portfolio Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="blog-home-1.html">Blog Home 1</a>
-                                </li>
-                                <li>
-                                    <a href="blog-home-2.html">Blog Home 2</a>
-                                </li>
-                                <li>
-                                    <a href="blog-post.html">Blog Post</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="full-width.html">Full Width Page</a>
-                                </li>
-                                <li>
-                                    <a href="sidebar.html">Sidebar Page</a>
-                                </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="404.html">404</a>
-                                </li>
-                                <li>
-                                    <a href="pricing.html">Pricing Table</a>
-                                </li>
-                            </ul>
-                        </li> -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -201,6 +149,7 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                 </div>
             </div>
             <div class="row weather-row">   
+                @if(isset($weather_data))
                 <div class="col-md-6">
                     <h1>Dhaka</h1>
                     <h3>Bangladesh</h3> 
@@ -210,6 +159,7 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                     <h3><span class="glyphicon glyphicon-cloud" ></span><span style="margin-left: 10px;"><?php print_r( $weather_data->query->results->channel->item->condition->text);?></span></h3>
                     <h3><span >&uarr; <?php print_r( $weather_data->query->results->channel->item->forecast[0]->high);?>&deg;</span> <span >    &darr; <?php print_r( $weather_data->query->results->channel->item->forecast[0]->low);?>&deg;</span> </h3>
                     <p><span class="temparature_text_large"><?php print_r( $weather_data->query->results->channel->item->condition->temp);?>&deg;</span><span style="font-size: 25px">F</span></p>
+
                 </div>         
                 <div class="col-md-6">
                     <div > 
@@ -224,173 +174,62 @@ header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Dispo
                         </tr>
                     </thead>
                     <tbody>
-                     <?php for($i=0;$i<10;$i++):?>
-                       <tr>
-                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->date);?></td>
-                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->day);?></td>
-                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->high);?>&deg;</td>
-                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->low);?>&deg;</td>
-                           <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->text);?></td>
-                       </tr>   
+                       <?php for($i=0;$i<10;$i++):?>
+                         <tr>
+                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->date);?></td>
+                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->day);?></td>
+                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->high);?>&deg;</td>
+                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->low);?>&deg;</td>
+                             <td><?php print_r( $weather_data->query->results->channel->item->forecast[$i]->text);?></td>
+                         </tr>   
 
-                   <?php endfor;?>
-               </tbody>
-           </table>
-       </div>
+                     <?php endfor;?>
+                 </tbody>
+             </table>
+         </div>
+     </div>
+     @endif
+ </div>
 
-   </div>
-
-
-<!--                 <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4><i class="fa fa-fw fa-check"></i> Bootstrap v3.3.7</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                            <a href="#" class="btn btn-default">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4><i class="fa fa-fw fa-gift"></i> Free &amp; Open Source</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                            <a href="#" class="btn btn-default">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4><i class="fa fa-fw fa-compass"></i> Easy to Use</h4>
-                        </div>
-                        <div class="panel-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-                            <a href="#" class="btn btn-default">Learn More</a>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <!-- /.row -->
-
-            <!-- Portfolio Section -->
-<!--             <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Portfolio Heading</h2>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <a href="portfolio-item.html">
-                        <img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="">
-                    </a>
-                </div>
-            </div> -->
-            <!-- /.row -->
-
-            <!-- Features Section -->
-<!--             <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Modern Business Features</h2>
-                </div>
-                <div class="col-md-6">
-                    <p>The Modern Business template by Start Bootstrap includes:</p>
-                    <ul>
-                        <li><strong>Bootstrap v3.3.7</strong>
-                        </li>
-                        <li>jQuery v1.11.1</li>
-                        <li>Font Awesome v4.2.0</li>
-                        <li>Working PHP contact form with validation</li>
-                        <li>Unstyled page elements for easy customization</li>
-                        <li>17 HTML pages</li>
-                    </ul>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-                </div>
-                <div class="col-md-6">
-                    <img class="img-responsive" src="http://placehold.it/700x450" alt="">
-                </div>
-            </div> -->
-            <!-- /.row -->
-
-            <!-- <hr> -->
-
-            <!-- Call to Action Section -->
-<!--             <div class="well">
-                <div class="row">
-                    <h4>Market Prices</h4>    
-                </div>
-            </div> -->
-
-            <hr>
-            <div class="row">
-                <div class="col-lg-12 ">
-                    <h1 class="page-header text-center">
-                        Get The Latest Market Update
-                    </h1> 
-                </div>
-            </div>
-            <div class="row" id="market_price_div">
-                <iframe id="theFrame" src="http://180.211.159.171/PublicPortal/MarketDisplayFullScreenBangla.php" style="width:100%;min-height: 500px;overflow: scroll;" frameborder="0">
-                </iframe>
-            </div>
-            <!-- <object type="text/html" class="row" data="http://180.211.159.171/PublicPortal/MarketDisplayFullScreenBangla.php" style="width:100%; height:100%"> -->
-            <!-- <p>backup content</p> -->
-            <!-- </object> -->
-
-            <!-- Footer -->
-            <footer>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p>Copyright &copy; Your Website 2014</p>
-                    </div>
-                </div>
-            </footer>
-
+ <hr>
+ <div class="row">
+    <div class="col-lg-12 ">
+        <h1 class="page-header text-center">
+            Get The Latest Market Update
+        </h1> 
+    </div>
+</div>
+<div class="row" id="market_price_div">
+    <iframe id="theFrame" src="http://180.211.159.171/PublicPortal/MarketDisplayFullScreenBangla.php" style="width:100%;min-height: 500px;overflow: scroll;" frameborder="0">
+    </iframe>
+</div>
+<!-- Footer -->
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="text-center">Copyright &copy; Agribiznes.com</p>
         </div>
-        <!-- /.container -->
+    </div>
+</footer>
+
+</div>
+<!-- /.container -->
 
 
 
 
-        <!-- jQuery -->
-        <script src="{{ asset ('/assets/js/jquery.js') }}"></script>
-        <script src="{{ asset ('/assets/js/bootstrap.min.js') }}"></script>
-        <!-- <script src="{{ asset ('/assets/js/cross-domain-request.js') }}"></script> -->
-        <!-- Script to Activate the Carousel -->
-        <script>
+<!-- jQuery -->
+<script src="{{ asset ('/assets/js/jquery.js') }}"></script>
+<script src="{{ asset ('/assets/js/bootstrap.min.js') }}"></script>
+<!-- <script src="{{ asset ('/assets/js/cross-domain-request.js') }}"></script> -->
+<!-- Script to Activate the Carousel -->
+<script>
 
-            $('.carousel').carousel({
+    $('.carousel').carousel({
                 interval: 5000 //changes the speed
             })
 
-            $(document).ready( function() { 
+    $(document).ready( function() { 
                 // function requestCrossDomain(site,callback) {
                 // alert("hello");
                 // if (!site) {

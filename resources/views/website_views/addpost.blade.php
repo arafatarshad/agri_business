@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>Agri Biznes.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset ('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -23,6 +23,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <style>
+            body{
+                /*color: #ffffff;*/
+            }
             .addvertisement_image{
                 height: 500px ;
                 /*width: 500px ;*/
@@ -31,166 +34,82 @@
         </style>
     </head>
 
-    <body>
+    <body class="style-13">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{URL::to('/')}}/">Agri Business</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="{{URL::to('/')}}/about">About</a>
-                        </li>
-<!--                         <li>
-                            <a href="services.html">Services</a>
-                        </li> -->
-                        <li>
-                            <a href="{{URL::to('/')}}/contact">Contact</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
-                        </li>
-                        <li>
-                            <a href="{{URL::to('/')}}/auth/login">Log In</a>
-                        </li>                        
-<!--                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="portfolio-1-col.html">1 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-2-col.html">2 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-3-col.html">3 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-4-col.html">4 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-item.html">Single Portfolio Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="blog-home-1.html">Blog Home 1</a>
-                                </li>
-                                <li>
-                                    <a href="blog-home-2.html">Blog Home 2</a>
-                                </li>
-                                <li>
-                                    <a href="blog-post.html">Blog Post</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="full-width.html">Full Width Page</a>
-                                </li>
-                                <li>
-                                    <a href="sidebar.html">Sidebar Page</a>
-                                </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="404.html">404</a>
-                                </li>
-                                <li>
-                                    <a href="pricing.html">Pricing Table</a>
-                                </li>
-                            </ul>
-                        </li> -->
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container -->
-        </nav>
-
-        @if (isset($errors) && count($errors) > 0)
-        <ul style="color: red">
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach </ul>
-          @endif
-        <!-- Page Content -->
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-
-            <!-- Page Heading/Breadcrumbs -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        <small><a href="{{URL::to('/')}}/post/{{$data[0]->id}}">{{$data[0]->name}}</a>
-                        </small>
-                    </h1>
-<!--                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Blog Post</li>
-                </ol> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{URL::to('/')}}/"><b style="color: #00ff3f">Agri</b><span style="color: #FF9800">Biznes</span></a>
             </div>
-        </div>
-        <!-- /.row -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{URL::to('/')}}/about">About</a>
+                    </li> 
+                    <li>
+                        <a href="{{URL::to('/')}}/contact">Contact</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::to('/')}}/auth/login" class=""><button class="btn btn-xs btn-primary" style="padding: 1px 25px">Log In</button></a>
+                    </li>                        
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div> 
+    </nav>
 
-        <!-- Content Row -->
+
+    @if (isset($errors) && count($errors) > 0)
+    <ul style="color: red">
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach </ul>
+      @endif
+      <!-- Page Content -->
+      <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
         <div class="row">
-
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-
-                <!-- Blog Post -->
+            <div class="col-lg-12">
+                <h1 class="" >
+                    <small><a style="color: #FF9800;" href="{{URL::to('/')}}/post/{{$data[0]->id}}">{{$data[0]->name}}</a>
+                    </small>
+                </h1> 
+            </div>
+        </div> 
+        <div class="row"> 
+            <div class="col-lg-8"> 
+                <p style="color: #ffffff"><i class="fa fa-clock-o"></i> Posted on {{$data[0]->post_date}} at {{$data[0]->post_time}} </p>
+                <hr> 
+                <img class="img-responsive addvertisement_image"  src="{{asset('uploads/'.$data[0]->photo)}}" alt="">
 
                 <!-- <hr> -->
 
-                <!-- Date/Time -->
-                <p><i class="fa fa-clock-o"></i> Posted on {{$data[0]->post_date}} at {{$data[0]->post_time}} </p>
-
-                <hr>
-                
-                <!-- Preview Image -->
-                <img class="img-responsive addvertisement_image"  src="{{asset('uploads/'.$data[0]->photo)}}" alt="">
-
-                <hr>
-
                 <!-- Post Content -->
-                <p class="lead">
-
+                <p class="lead" style="color: #fff;">
                     @if(isset($data[0]->description) && !empty($data[0]->description))
                     {{$data[0]->description}}
                     @endif
-
                 </p> 
-
-                <hr>
-
-                <!-- Blog Comments -->
-
-                <!-- Comments Form -->
-                <div class="well">
+                <hr> 
+                <div class="well" >
                     <h4>Leave a Comment:</h4>
                     <form role="form" action="{{URL::to('/')}}/comment" method="POST">
                         {!! csrf_field() !!}
                         <input type="hidden" name="post_id" value="{{$data[0]->id}}">
                         <div class="form-group"> 
-                        <input class="form-control" rows="3" required="" name="commenter_name" placeholder="Your Name">
+                            <input class="form-control" rows="3" required="" name="commenter_name" placeholder="Your Name">
                         </div>
                         <div class="form-group"> 
                             <textarea class="form-control" name="comment" placeholder="Comment" rows="3" required=""></textarea>
@@ -200,16 +119,7 @@
                     </form>
                 </div>
 
-                <hr>
-
-                <!-- Posted Comments -->
-
-                <!-- Comment -->
-                <div class="media">
-                    <!-- <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a> -->
-
+                <div class="media"> 
                     <div class="media-body">
                         @if(isset($comments) && !empty($comments))
                         @foreach($comments as $comment)
@@ -220,32 +130,7 @@
                         @endforeach
                         @endif
                     </div>
-                </div>
-
-                <!-- Comment -->
-<!--                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div> 
-                    </div>
-                </div> -->
-
+                </div> 
             </div>
 
             <!-- Blog Sidebar Widgets Column -->
@@ -304,7 +189,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                <p style="color: #fff;" class="text-center">Copyright &copy; Agribiznes.com</p>
                 </div>
             </div>
         </footer>

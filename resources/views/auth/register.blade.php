@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Registration Page</title>
+    <title>Agri Biznes | Registration Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -21,7 +21,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
 
-    <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jQuery-2.2.3.min.js") }}"></script>
+    <script src="{{ asset ("/bower_components/admin-lte/plugins/jQuery/jquery-2.2.3.min.js") }}"></script>
     <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
     <!-- Bootstrap 3.3.2 JS -->
     <script src="{{ asset ("/bower_components/admin-lte/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
@@ -39,11 +39,16 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <style>
+    .select2-selection.select2-selection--single{
+      border-radius: 0px;
+    }
+  </style>
 </head>
 <body class="hold-transition register-page">
   <div class="register-box">
     <div class="register-logo">
-      <a href="../../index2.html"><b>Agri</b>Business</a>
+      <a href="../../index2.html"><b>Agri</b>Biznes</a>
     </div>
 
     <div class="register-box-body">
@@ -185,6 +190,7 @@
 
 
 $("#thana_id").select2({
+  "placeholder":"Select a Thana",
   ajax: {
    url: "{{URL::to('/')}}/getallthana",
         dataType: 'json',

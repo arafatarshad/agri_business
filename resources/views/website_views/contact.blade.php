@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>Agri Biznes</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset ('/assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -24,17 +24,20 @@
 <style>
             body{
             /*background: #eeeeee;*/
-            background: rgb(96,99,114);
+            /*background: rgb(96,99,114);*/
             color: #fff;
         }
         li{
             color: black;
             font-size: 12px;
         }
+        .list-unstyled.list-inline.list-social-icons>li>a{
+            background: : purple;
+        }
 </style>
 </head>
 
-<body>
+<body class="style-13">
 
     <!-- Navigation -->
         <!-- Navigation -->
@@ -48,17 +51,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{URL::to('/')}}/">Agri Business</a>
+                    <a class="navbar-brand" href="{{URL::to('/')}}/"><b style="color: #00ff3f">Agri</b><span style="color: #FF9800">Biznes</span></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="{{URL::to('/')}}/about">About</a>
-                        </li>
-<!--                         <li>
-                            <a href="services.html">Services</a>
-                        </li> -->
+                        </li> 
                         <li>
                             <a href="{{URL::to('/')}}/contact">Contact</a>
                         </li>
@@ -66,62 +66,8 @@
                         <a href="{{URL::to('/')}}/advertisements">Advertisements</a>
                         </li>
                         <li>
-                        <a href="{{URL::to('/')}}/auth/login">Log In</a>
+                        <a href="{{URL::to('/')}}/auth/login" class=""><button class="btn btn-xs btn-primary" style="padding: 1px 25px">Log In</button></a>
                         </li>                        
-<!--                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="portfolio-1-col.html">1 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-2-col.html">2 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-3-col.html">3 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-4-col.html">4 Column Portfolio</a>
-                                </li>
-                                <li>
-                                    <a href="portfolio-item.html">Single Portfolio Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="blog-home-1.html">Blog Home 1</a>
-                                </li>
-                                <li>
-                                    <a href="blog-home-2.html">Blog Home 2</a>
-                                </li>
-                                <li>
-                                    <a href="blog-post.html">Blog Post</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="full-width.html">Full Width Page</a>
-                                </li>
-                                <li>
-                                    <a href="sidebar.html">Sidebar Page</a>
-                                </li>
-                                <li>
-                                    <a href="faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="404.html">404</a>
-                                </li>
-                                <li>
-                                    <a href="pricing.html">Pricing Table</a>
-                                </li>
-                            </ul>
-                        </li> -->
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -130,30 +76,13 @@
         </nav>
     <!-- Page Content -->
     <div class="container">
-
-        <!-- Page Heading/Breadcrumbs -->
-<!--         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Contact
-                    <small>Subheading</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Contact</li>
-                </ol>
-            </div>
-        </div> -->
-        <!-- /.row -->
-
+ 
         <!-- Content Row -->
         <div class="row" style="margin-top: 50px">
             <!-- Map Column -->
-            <div class="col-md-8">
-                <!-- Embedded Google Map -->
+            <div class="col-md-8"> 
                 <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
-            </div>
-            <!-- Contact Details Column -->
+            </div> 
             <div class="col-md-4">
                 <h3>Contact Details</h3>
                 <p>
@@ -166,8 +95,8 @@
                 </p>
                 <p><i class="fa fa-clock-o"></i> 
                     <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
-                <ul class="list-unstyled list-inline list-social-icons">
-                    <li>
+                <ul class=" list-inline list-social-icons">
+<!--                     <li>
                         <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
                     </li>
                     <li>
@@ -178,7 +107,7 @@
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -230,7 +159,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p class="text-center">Copyright &copy; Agribiznes.com</p>
                 </div>
             </div>
         </footer>
